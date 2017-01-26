@@ -1,8 +1,10 @@
+#define _GNU_SOURCE
 #include <stdio.h>
 #include <string.h>
 #include <ncurses.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <time.h>
 int main (int argc, char *argv[])
 {
 	/*
@@ -40,17 +42,26 @@ int main (int argc, char *argv[])
 	{
 		int sector = rand() % 100 + 1; //sector equals a random number from 1 to 100 (verify on that)
 		char sectorts[3];
-		char sectorwl[4];
+		char sectorlc[3]; //converted letter
+		char *sectorln; //sector with number and letter
 		sprintf(sectorts, "%d", sector); //converts the sector number to string
-		sectorwl[0] = sectorletter[rand()%26+0] + '\0';//make the zero position the char that's converted
+		sectorlc[0] = sectorletter[rand()%26+0] + '\0';//make the zero position the char that's converted
+		asprintf(&sectorln, "%s%s", sectorlc, sectorts);
 		//memcpy(sectorwl, sectorletter[rand()%26+0], 1);
 		//printf("%s\n", sectorletter);
 		//char sectorwl = sectorletter[rand()%26+0] 
+		printw("%s ", sectorln);
 	}
+	printw("\n");
+	int happy = 0;
 	while ((open = getch()) != 'q')
 	{
-		
-		//printw("%c\n",open);
+		//while (happy == 0)
+		//{
+			printw("Which sector do you want to select?\nNOTE: You cannot select any more sectors aftere this point in this seesion, unless of course you choose to restart the session. (You can keep the sector that you select into the next restart but you'll be losing <insert what they'll be losing>)\n");
+		//}		
+			
+	//printw("%c\n",open);
 		//break;
 	}
 	refresh();
