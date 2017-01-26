@@ -54,13 +54,15 @@ int main (int argc, char *argv[])
 	}
 	printw("\n");
 	int happy = 0;
+	//while (happy == 0)
+	//{
+	printw("Which sector do you want to select?\nNOTE: You cannot select any more sectors aftere this point in this session, unless of course you choose to restart the session. (You can keep the sector that you select into the next restart but you'll be losing <insert what they'll be losing>)\n"); //make this in a loop that works
+	char input[4];	
 	while ((open = getch()) != 'q')
 	{
-		//while (happy == 0)
-		//{
-			printw("Which sector do you want to select?\nNOTE: You cannot select any more sectors aftere this point in this seesion, unless of course you choose to restart the session. (You can keep the sector that you select into the next restart but you'll be losing <insert what they'll be losing>)\n");
-		//}		
-			
+		input[i];
+		//printw("%c", input[i]);
+		i++;	
 	//printw("%c\n",open);
 		//break;
 	}
