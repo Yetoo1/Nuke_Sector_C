@@ -1,7 +1,7 @@
 #define _GNU_SOURCE
 #include <stdio.h>
 #include <string.h>
-#include <ncurses.h>
+//#include <ncurses.h> This has no practical use for now
 #include <stdlib.h>
 #include <unistd.h>
 #include <time.h>
@@ -24,18 +24,17 @@ int main (int argc, char *argv[])
 		}
 	}
 	*/
-	initscr();
-	noecho();
-	curs_set(FALSE);
-	refresh();
-	int open;
+	//initscr();
+	//noecho();
+	//curs_set(FALSE);
+	//refresh();
 	srand(time(NULL)); //starts the instance of random
 	/* The arrays that store shit starts here */
 	char sectorletter[26] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'}; //will need to convert to string
 	//char sectorletter[26] =  {"A","B","C","D","E","F","G","H","I","J","K", "L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"}; //this is the array that is supposed to hold the predefined letters that sectors will contain 
 	/* The arrays that store shit ends here */
 	int sectoramnt = rand() % 100 + 1; //sectoramnt equals a random number from 1 to 100 (verify on that) 
-	printw("Sectors:\n");
+	printf("Sectors:\n");
 	/* THE LOOP THAT PUTS VARIABLES INTO THE INDEX STARTS HERE */
 	int i;
 	for (i = 0; i < sectoramnt; i++) //for loop iterates for whatever number of times defined by sectoramnt
@@ -51,23 +50,31 @@ int main (int argc, char *argv[])
 		//memcpy(sectorwl, sectorletter[rand()%26+0], 1);
 		//printf("%s\n", sectorletter);
 		//char sectorwl = sectorletter[rand()%26+0] 
-		printw("%s ", sectorln);
+		printf("%s ", sectorln);
 	}
-	printw("\n");
+	printf("\n");
 	int happy = 0;
-	//while (happy == 0)
-	//{
-	printw("Which sector do you want to select?\nNOTE: You cannot select any more sectors aftere this point in this session, unless of course you choose to restart the session. (You can keep the sector that you select into the next restart but you'll be losing <insert what they'll be losing>)\n"); //make this in a loop that works
-	char input[4];	
-	while ((open = getch()) != 'q')
+	while (happy != 1) 
 	{
-		input[i];
+		printf("Which sector do you want to select?\nNOTE: You cannot select any more sectors aftere this point in this session, unless of course you choose to restart the session. (You can keep the sector that you select into the next restart but you'll be losing <insert what they'll be losing>)\n"); //make this in a loop that works
+		char sectordec[5];
+		fgets(sectordec, 5, stdin);
+		printf("You selected sector %s\n", sectordec);	
+		for (i = 0; u < sectoramnt; i++)
+		{
+			if (strcmp(sectordec, sectorindex[i]))
+		}	
+	}	
+	//char input[4];	
+	//while ((open = getch()) != 'q')
+	//{
+	//	input[i];
 		//printw("%c", input[i]);
-		i++;	
+	//	i++;	
 	//printw("%c\n",open);
 		//break;
-	}
-	refresh();
-	curs_set(TRUE);
-	endwin();
+	//}
+	//refresh();
+	//curs_set(TRUE);
+	//endwin();
 }
