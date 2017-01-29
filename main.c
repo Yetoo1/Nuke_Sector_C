@@ -40,6 +40,7 @@ int main (int argc, char *argv[])
 	int i;
 	for (i = 0; i < sectoramnt; i++) //for loop iterates for whatever number of times defined by sectoramnt
 	{
+		//for some reason this part outputs garbled characters with some versions of gcc, the one on my laptop works though
 		int sector = rand() % 100 + 1; //sector equals a random number from 1 to 100 (verify on that)
 		char sectorts[3];
 		char sectorlc[3]; //converted letter
