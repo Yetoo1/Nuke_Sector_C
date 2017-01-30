@@ -5,6 +5,14 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <time.h>
+/* Put the below values into a struct */
+//const char *sectorletter[26] =  {"A","B","C","D","E","F","G","H","I","J","K", "L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"}; //this is the array that is supposed to hold the predefined letters that sectors will contain 
+//const char *sectorindexn[] = {"s", "s"};
+//int sort(char *sectorindex) //note that this is a single array
+//{
+//	printf("%s ", sectorindexn[]);
+	
+//}
 int main (int argc, char *argv[])
 {
 	/*
@@ -29,18 +37,28 @@ int main (int argc, char *argv[])
 	//curs_set(FALSE);
 	//refresh();
 	srand(time(NULL)); //starts the instance of random
-	char *sectorletter[26] =  {"A","B","C","D","E","F","G","H","I","J","K", "L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"}; //this is the array that is supposed to hold the predefined letters that sectors will contain 
-	/* The arrays that store shit ends here */
-	int sectoramnt = rand() % 100 + 1; //sectoramnt equals a random number from 1 to 100 (verify on that) 
+	int sectoramnt = rand() % 100 + 1;
 	char *sectorindex[sectoramnt];
+	char *sectorletter[26] =  {"A","B","C","D","E","F","G","H","I","J","K", "L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"}; //this is the array that is supposed to hold the predefined letters that sectors will contain 
+	char *sepli[sectoramnt]; //separated letter index, each position in this tells which number should go where
+	char *seplt; //separated letter temp
 	printf("Sectors:\n");
-	/* THE LOOP THAT PUTS VARIABLES INTO THE INDEX STARTS HERE */
 	int i;
+	/* THE LOOP THAT PUTS ITEMS INTO THE INDEX STARTS HERE */
 	for (i = 0; i < sectoramnt; i++) //for loop iterates for whatever number of times defined by sectoramnt
 	{
 		int sector = rand() % 100 + 1; //sector equals a random number from 1 to 100 (verify on that)
 		asprintf(&sectorindex[i], "%s%d", sectorletter[rand()%26+0], sector); //this took me for fucking ever to figure this out
-		printf("%s ", sectorindex[i]);
+										      //however if we want to sort, we are going to need to take this apart
+										      //we need to take it apart each time, because I'm not going to store separate arrays or multidimensional arrays that tell where each letter is, i just want arrays that have the letter, i always want this shit to look modular 
+										      //also incase you think there should be variables here that could makes this go faster and not go directly to the sector index, it would only make it faster for this instance since we are creating the variables to put into the array, but we want this to happen multiple times so we need to make this modular, maybe i'm using faster wrong but just less yeah
+		printf("%s ", sectorindex[i]); //this needs to get sorted ALSO PLEASE NOTE THAT SECTORLETTER IS GETTING A NEW LETTER EVERY ITERATION
+		printf("\n");
+		memcpy(seplt, sectorindex[i], 1);
+		sepli[i] = seplt; //memcpy doesn't agree with arrays with normal behavior for some reason. 
+		printf("%s\n", sepli[i]);
+		//sort(sectorindex[i]);//, sectoramnt);
+		//try memmove, it copies to a temp so maybye that's another 1 liner
 	}
 	printf("\n");
 	int happy = 0;
@@ -53,7 +71,8 @@ int main (int argc, char *argv[])
 		//for (i = 0; u < sectoramnt; i++)
 		//{
 		//	if (strcmp(sectordec, sectorindex[i]))
-		//}	
+		//}
+		happy = 1;	
 	}	
 	//char input[4];	
 	//while ((open = getch()) != 'q')
