@@ -37,7 +37,7 @@ int main (int argc, char *argv[])
 	//curs_set(FALSE);
 	//refresh();
 	srand(time(NULL)); //starts the instance of random
-	int sectoramnt = rand() % 100 + 1;
+	int sectoramnt = rand() % 100 + 1; //this is part of the problem causing the segmentation fault, the other random generator doesn't though
 	char *sectorindex[sectoramnt];
 	char *sectorletter[26] =  {"A","B","C","D","E","F","G","H","I","J","K", "L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"}; //this is the array that is supposed to hold the predefined letters that sectors will contain 
 	char *sepli[sectoramnt]; //separated letter index, each position in this tells which number should go where
