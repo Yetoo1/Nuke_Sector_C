@@ -46,6 +46,9 @@ int main (int argc, char *argv[])
 	char *sepni[sectoramnt]; //separated number index, each position in this tells which shoudl go where and such 
 	char *seplt = malloc(L * sizeof(char)); //sep letter temp
 	char *sepnt = malloc(N * sizeof(char)); //sep number temp
+	char *tmp;
+	int lp[sectoramnt];
+	int lps = (int)(sizeof(lp)/sizeof(lp[0]));
 	int i;
 	int k;
 	printf("Sectors:\n");
@@ -74,17 +77,37 @@ int main (int argc, char *argv[])
 		for (k = 0; k < 27; k++) //26  becuase the current iteration is the value in the index minus 1 which is then proper, 25 is the position of 26
 		{
 			//what is the the fucking 4reaosn why i have have a headache it is bvery annoying how i have a headachw evry day of my fuckin g luife, will the pain ever go  away in a split second of wonder i wonde rwhat the possibilties are, such an answr would vch nafge the outcome for me indefinitely, unintentionally, but no matter, i will always wonder, it will always be a queastion of supreme unknown, i wish i could find that, but it will not happen, i am the victim, or at least that's what i hope, probably im  the perpetuiator, that's how this type of shit works, but that's no matter because I have 2wonderful capabilities capailitie sgreater than all, greater than me, greater than i, not greater than you, becauswe you are arbituary, i am absolute, but that's like, could you know? i wish i could holsd the answers, but they are so dear to someone in me, it makes me sad that such a person would withhold that from another. It could all bhe a n elaborate trap keeping myself from blame, maybe it;'s not even myself, and its yourself that the one at question. it make stno sense once you come to conclusion. but i digress, all i want  is appeal, maybe i jus tweant to get along so that there is no more asnnoying fights, because thos efightr s make me sad, that's another lie, they make me annoyed.
-			if (strcmp(sepli[i], sectorletter[k - 1]) == 0) //checks for position in letters
+			if (strcmp(sepli[i], sectorletter[k]) == 0) //checks for position in letters
 			{
-				printf("found a bread winner. Sector: %s Letter: %d Iteration of separation: %d\n",sectorindex[i], k, i);
+				printf("Your verification:  Sector: %s Letter: %d Iteration of separation: %d\n",sectorindex[i], k, i);
+				lp[i] = k;
 			}
 		}
+		printf("\n");
 		//then keep track of the index with numbers
 		//<start sorting of>
 		//sort(sectorindex[i]);//, sectoramnt);
 		//REMEMBER UNDEFINED BEHAVIOR IS BECAUSE YOU ARE WRITING BEYOND THE ALLOCATED SPACE HOLY FUCK WAS IT THAT HARD TO FIND AN ANSWER JESUS
 	}
+	for (i = 0; i < lps; i++)
+	{
+		printf("In: %s\n", sectorindex[i]);
+		for (k = 0; k < lps; k++)
+		{
+			if (lp[i] > lp[k+1])
+			{
+				tmp = sectorindex[i];
+				sectorindex[i] = sectorindex[k+1];
+				sectorindex[k+1] = tmp;
+			}
+		}
+		printf("\nOut #%d: %s\n", k, sectorindex[k]);
+	}
 	printf("\n");
+	for (i = 0; i < sectoramnt; i++)
+	{
+		printf("%s\n", sectorindex[i]);
+	}
 	int happy = 0;
 	while (happy != 1) 
 	{
