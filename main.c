@@ -60,8 +60,8 @@ int main (int argc, char *argv[])
 		asprintf(&sectorindex[i], "%s%d", sectorletter[rand()%26+0], sector); //this took me for fucking ever to figure this out
 										      //however if we want to sort, we are going to need to take this apart
 										      //we need to take it apart each time, because I'm not going to store separate arrays or multidimensional arrays that tell where each letter is, i just want arrays that have the letter, i always want this shit to look modular 
-										      //also incase you think there should be variables here that could makes this go faster and not go directly to the sector index, it would only make it faster for this instance since we are creating the variables to put into the array, but we want this to happen multiple times so we need to make this modular, maybe i'm using faster wrong but just less yeah
-		//printf("%s ", sectorindex[i]); //this needs to get sorted ALSO PLEASE NOTE THAT SECTORLETTER IS GETTING A NEW LETTER EVERY ITERATION
+		//just make all the shit more separate, it 								      //also incase you think there should be variables here that could makes this go faster and not go directly to the sector index, it would only make it faster for this instance since we are creating the variables to put into the array, but we want this to happen multiple times so we need to make this modular, maybe i'm using faster wrong but just less yeah
+		printf("%s\n", sectorindex[i]); //this needs to get sorted ALSO PLEASE NOTE THAT SECTORLETTER IS GETTING A NEW LETTER EVERY ITERATION
 		//printf("\n");
 		/*The number and letter both need to be separated because we need to keep track of both to sort the sectorindex*/
 		/*---separates letter---*/
@@ -72,9 +72,17 @@ int main (int argc, char *argv[])
 		strncpy(sepnt, &sectorindex[i][1], N-1); //&index[i][1] means that from the first letter of the item in the current iteration, it's going to copy the contents 
 		sepnt[N-1] = 0;
 		sepni[i] = sepnt;
-		//printf("Letter: %s Number: %s\n\n", sepli[i], sepni[i]);
+		printf("Initial: %s\nLetter: %s Number: %s\n\n", sectorindex[i], sepli[i], sepni[i]);
 		//first keep track of the index with letters
-		for (k = 0; k < 27; k++) //26  becuase the current iteration is the value in the index minus 1 which is then proper, 25 is the position of 26
+		//making the for loop here separate because I have a feeling that this is causing an issue
+		
+		printf("\n");
+		//then keep track of the index with numbers
+		//<start sorting of>
+		//sort(sectorindex[i]);//, sectoramnt);
+		//REMEMBER UNDEFINED BEHAVIOR IS BECAUSE YOU ARE WRITING BEYOND THE ALLOCATED SPACE HOLY FUCK WAS IT THAT HARD TO FIND AN ANSWER JESUS
+	}
+for (k = 0; k < 27; k++) //26  becuase the current iteration is the value in the index minus 1 which is then proper, 25 is the position of 26
 		{
 			//what is the the fucking 4reaosn why i have have a headache it is bvery annoying how i have a headachw evry day of my fuckin g luife, will the pain ever go  away in a split second of wonder i wonde rwhat the possibilties are, such an answr would vch nafge the outcome for me indefinitely, unintentionally, but no matter, i will always wonder, it will always be a queastion of supreme unknown, i wish i could find that, but it will not happen, i am the victim, or at least that's what i hope, probably im  the perpetuiator, that's how this type of shit works, but that's no matter because I have 2wonderful capabilities capailitie sgreater than all, greater than me, greater than i, not greater than you, becauswe you are arbituary, i am absolute, but that's like, could you know? i wish i could holsd the answers, but they are so dear to someone in me, it makes me sad that such a person would withhold that from another. It could all bhe a n elaborate trap keeping myself from blame, maybe it;'s not even myself, and its yourself that the one at question. it make stno sense once you come to conclusion. but i digress, all i want  is appeal, maybe i jus tweant to get along so that there is no more asnnoying fights, because thos efightr s make me sad, that's another lie, they make me annoyed.
 			if (strcmp(sepli[i], sectorletter[k]) == 0) //checks for position in letters
@@ -83,18 +91,12 @@ int main (int argc, char *argv[])
 				lp[i] = k;
 			}
 		}
-		printf("\n");
-		//then keep track of the index with numbers
-		//<start sorting of>
-		//sort(sectorindex[i]);//, sectoramnt);
-		//REMEMBER UNDEFINED BEHAVIOR IS BECAUSE YOU ARE WRITING BEYOND THE ALLOCATED SPACE HOLY FUCK WAS IT THAT HARD TO FIND AN ANSWER JESUS
-	}
 	for (i = 0; i < lps; i++)
 	{
-		printf("In: %s\n", sectorindex[i]);
-		for (k = 0; k < lps; k++)
+		printf("\nIn: %s\n", sectorindex[i]);
+		for (k = i + 1; k < lps; k++)
 		{
-			if (lp[i] > lp[k+1])
+			if (lp[i] > lp[k + 1])
 			{
 				tmp = sectorindex[i];
 				sectorindex[i] = sectorindex[k+1];
@@ -102,6 +104,8 @@ int main (int argc, char *argv[])
 			}
 		}
 		printf("\nOut #%d: %s\n", k, sectorindex[k]);
+		//printf("Your verification:  Sector: %s Letter: %d Iteration of separation: %d\n",sectorindex[i], k, i);
+
 	}
 	printf("\n");
 	for (i = 0; i < sectoramnt; i++)
